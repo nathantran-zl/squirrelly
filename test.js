@@ -53,5 +53,5 @@ window.onload = function () {
   }
   render()
   document.getElementById('template').addEventListener('input', render)
-  document.getElementById('options').addEventListener('input', render)
+  document.getElementById('data').addEventListener('input', render)
 }

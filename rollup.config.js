@@ -8,6 +8,7 @@ export default [{
         file: 'dist/squirrelly.min.js',
         format: 'umd',
         name: 'Sqrl',
+        sourcemap: true
     },
     plugins: [
         uglify()
@@ -19,6 +20,7 @@ export default [{
         file: 'dist/squirrelly.dev.js',
         format: 'umd',
         name: 'Sqrl',
+        sourcemap: true
     },
     plugins: [
     ]
@@ -29,6 +31,7 @@ export default [{
         file: 'dist/squirrelly.runtime.js',
         format: 'umd',
         name: 'Sqrl',
+        sourcemap: true
     },
     plugins: [
         uglify()
@@ -40,6 +43,7 @@ export default [{
         file: 'dist/squirrelly.runtime.dev.js',
         format: 'umd',
         name: 'Sqrl',
+        sourcemap: true
     },
     plugins: [
     ]

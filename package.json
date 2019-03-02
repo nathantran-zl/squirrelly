@@ -6,15 +6,8 @@
   "homepage": "https://squirrelly.js.org",
   "scripts": {
     "test": "standard 'src/*.js' && mocha",
-    "build:runtime:dev": "webpack --env.target=browser",
-    "build:runtime:prod": "webpack --env.target=browser --env.production",
-    "build:runtime": "npm run build:runtime:dev && npm run build:runtime:prod",
-    "build:lib:dev": "webpack",
-    "build:lib:prod": "webpack --env.production",
-    "build:lib": "npm run build:lib:dev && npm run build:lib:prod",
-    "build": "npm run build:lib && npm run build:runtime",
-    "format": "standard --fix 'src/*.js'",
-    "postinstall": "node postinstall.js"
+    "build": "npx rollup -c",
+    "format": "standard --fix 'src/*.js'"
   },
   "keywords": [
     "template",
@@ -41,13 +34,12 @@
   "bugs": {
     "url": "https://github.com/nebrelbug/squirrelly/issues"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "^5.1.1",
-    "standard": "^12.0.1",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0"
+    "rollup": "^1.4.0",
+    "rollup-plugin-uglify": "^6.0.2",
+    "standard": "^12.0.1"
   },
   "standard": {
     "ignore": [

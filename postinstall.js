@@ -1,3 +1,5 @@
+// I may add this later, but for now leaving it off
+
 console.log('\x1b[32m', `
 Read the Squirrelly docs at https://squirrelly.js.org.
 

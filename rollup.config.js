@@ -1,4 +1,4 @@
-import { uglify } from "rollup-plugin-uglify";
+import { uglify } from "rollup-plugin-uglify"
 
 // rollup.config.js (building more than one bundle)
 
@@ -8,7 +8,7 @@ export default [{
         file: 'dist/squirrelly.min.js',
         format: 'umd',
         name: 'Sqrl',
-        sourcemap: true
+        sourcemap: false
     },
     plugins: [
         uglify()

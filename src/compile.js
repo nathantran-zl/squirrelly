@@ -9,7 +9,7 @@ import {
 } from './filters'
 import P from './partials'
 
-function Compile(str) {
+function Compile (str) {
   var lastIndex = 0 // Because lastIndex can be complicated, and this way the minifier can minify more
   var funcStr = '' // This will be called with Function() and returned
   var helperArray = [] // A list of all 'outstanding' helpers, or unclosed helpers
@@ -17,11 +17,11 @@ function Compile(str) {
   var helperAutoId = 0 // Squirrelly automatically generates an ID for helpers that don't have a custom ID
   var helperContainsBlocks = {} // If a helper contains any blocks, helperContainsBlocks[helperID] will be set to true
   var m
-  function globalRef(refName, filters) {
+  function globalRef (refName, filters) {
     return parseFiltered('options.' + refName, filters)
   }
 
-  function helperRef(name, id, filters) {
+  function helperRef (name, id, filters) {
     var prefix
     if (typeof id !== 'undefined') {
       if (/(?:\.\.\/)+/g.test(id)) { // Test if the helper reference is prefixed with ../
@@ -130,7 +130,6 @@ function Compile(str) {
         funcStr += 'tR+=Sqrl.H.' + m[10] + '(' + innerParams + ');' // If it's not native, passing args to a non-native helper
       }
     }
-
   }
   if (funcStr === '') {
     funcStr += "var tR='" + str.slice(lastIndex, str.length).replace(/'/g, "\\'") + "';"

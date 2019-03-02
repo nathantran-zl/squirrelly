@@ -1,5 +1,5 @@
 import F from './filters'
-import * as Sqrl from './runtime' // So we can pass Sqrl as a parameter to Render()
+// import * as Sqrl from './runtime' // So we can pass Sqrl as a parameter to Render()
 import H from './helpers'
 import P from './partials'
 
@@ -15,7 +15,7 @@ export function Render (template, options) {
   // If the template parameter is a function, call that function with (options, Sqrl)
   // If it's a string, first compile the string and then call the function
   if (typeof template === 'function') {
-    return template(options, Sqrl)
+    return template(options, { H: H, F: F, P: P })
   } else {
     return 'Err: Function must be 1st arg'
   }

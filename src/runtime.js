@@ -3,9 +3,9 @@ export { default as H } from './helpers'
 export {
   defineFilter,
   defineHelper,
-//  defineNativeHelper,
+  //  defineNativeHelper,
   definePartial,
-  Render,
+  Render
 //   renderFile,
 //   load,
 //   __express

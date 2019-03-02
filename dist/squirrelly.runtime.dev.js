@@ -4,17 +4,6 @@
   (global = global || self, factory(global.Sqrl = {}));
 }(this, function (exports) { 'use strict';
 
-  var Sqrl = /*#__PURE__*/Object.freeze({
-    get H () { return helpers; },
-    get defineFilter () { return defineFilter; },
-    get defineHelper () { return defineHelper; },
-    get definePartial () { return definePartial; },
-    get Render () { return Render; },
-    get F () { return filters; },
-    get setDefaultFilters () { return setDefaultFilters; },
-    get autoEscaping () { return autoEscaping; }
-  });
-
   var helpers = {
   // No helpers are included by default for the sake of size,
   // But there's an example of a helper below
@@ -108,6 +97,10 @@
     }
   }
 
+  var Partials = {/*
+      partialName: "partialString"
+  */};
+
   function defineFilter (name, callback) {
     filters[name] = callback;
   }
@@ -120,13 +113,14 @@
     // If the template parameter is a function, call that function with (options, Sqrl)
     // If it's a string, first compile the string and then call the function
     if (typeof template === 'function') {
-      return template(options, Sqrl)
+      return template(options, { H: helpers, F: filters, P: Partials })
     } else {
       return 'Err: Function must be 1st arg'
     }
   }
 
   function definePartial (name, str) {
+    Partials[name] = str;
   }
 
   // export { defaultTags } from './regexps'

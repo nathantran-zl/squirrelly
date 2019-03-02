@@ -4,23 +4,6 @@
   (global = global || self, factory(global.Sqrl = {}));
 }(this, function (exports) { 'use strict';
 
-  var Sqrl = /*#__PURE__*/Object.freeze({
-    get H () { return helpers; },
-    get Compile () { return Compile; },
-    get defineFilter () { return defineFilter; },
-    get defineHelper () { return defineHelper; },
-    get defineNativeHelper () { return defineNativeHelper; },
-    get definePartial () { return definePartial; },
-    get Render () { return Render; },
-    get renderFile () { return renderFile; },
-    get load () { return load; },
-    get __express () { return __express; },
-    get F () { return filters; },
-    get setDefaultFilters () { return setDefaultFilters; },
-    get autoEscaping () { return autoEscaping; },
-    get defaultTags () { return defaultTags; }
-  });
-
   var helpers = {
   // No helpers are included by default for the sake of size,
   // But there's an example of a helper below
@@ -291,7 +274,7 @@
       partialName: "partialString"
   */};
 
-  function Compile(str) {
+  function Compile (str) {
     var lastIndex = 0; // Because lastIndex can be complicated, and this way the minifier can minify more
     var funcStr = ''; // This will be called with Function() and returned
     var helperArray = []; // A list of all 'outstanding' helpers, or unclosed helpers
@@ -299,11 +282,11 @@
     var helperAutoId = 0; // Squirrelly automatically generates an ID for helpers that don't have a custom ID
     var helperContainsBlocks = {}; // If a helper contains any blocks, helperContainsBlocks[helperID] will be set to true
     var m;
-    function globalRef(refName, filters) {
+    function globalRef (refName, filters) {
       return parseFiltered('options.' + refName, filters)
     }
 
-    function helperRef(name, id, filters) {
+    function helperRef (name, id, filters) {
       var prefix;
       if (typeof id !== 'undefined') {
         if (/(?:\.\.\/)+/g.test(id)) { // Test if the helper reference is prefixed with ../
@@ -412,7 +395,6 @@
           funcStr += 'tR+=Sqrl.H.' + m[10] + '(' + innerParams + ');'; // If it's not native, passing args to a non-native helper
         }
       }
-
     }
     if (funcStr === '') {
       funcStr += "var tR='" + str.slice(lastIndex, str.length).replace(/'/g, "\\'") + "';";
@@ -440,9 +422,9 @@
     // If the template parameter is a function, call that function with (options, Sqrl)
     // If it's a string, first compile the string and then call the function
     if (typeof template === 'function') {
-      return template(options, Sqrl)
+      return template(options, { H: helpers, F: filters, P: Partials })
     } else if (typeof template === 'string') {
-      var res = load(options, template)(options, Sqrl);
+      var res = load(options, template)(options, { H: helpers, F: filters, P: Partials });
       return res
     }
   }
@@ -495,14 +477,12 @@
 
   function renderFile (filePath, options) {
     options.$file = filePath;
-    return load(options)(options, Sqrl)
+    return load(options)(options, { H: helpers, F: filters, P: Partials })
   }
 
   function __express (filePath, options, callback) {
     return callback(null, renderFile(filePath, options))
   }
-
-
 
   exports.H = helpers;
   exports.Compile = Compile;

@@ -241,27 +241,31 @@
     }
   }
   function parseFiltered (initialString, filterString) {
+    console.log(filterString);
     var filtersArray;
     var safe = false;
-    var filterStart = '';
-    var filterEnd = '';
+    var filterStart = defaultFilterCache.start;
+    var filterEnd = defaultFilterCache.end;
     if (filterString && filterString !== '') {
       filtersArray = filterString.split('|');
+      console.log(filtersArray);
       for (var i = 0; i < filtersArray.length; i++) {
-        filtersArray[i] = filtersArray[i].trim(); // Removing the spaces just in case someone put | filter| or | filter | or something similar
-        if (filtersArray[i] === '') continue
-        if (filtersArray[i] === 'safe') {
+        console.log(i);
+        // I need to store filtersArray[i] in a variable
+        var filter = filtersArray[i].trim(); // Removing the spaces just in case someone put | filter| or | filter | or something similar
+        console.log('filter: ' + filter);
+        if (filter === '') { continue }
+        if (filter === 'safe') {
+          console.log('safe');
           // If 'safe' is one of the filters, set safe to true but don't add Sqrl.F.safe
           // Essentially, 'safe' is a flag telling Squirrelly not to autoEscape
           safe = true;
           continue
         }
-        filterStart = 'Sqrl.F.' + filtersArray[i] + '(' + filterStart;
+        filterStart = 'Sqrl.F.' + filter + '(' + filterStart;
         filterEnd += ')';
       }
     }
-    filterStart += defaultFilterCache.start;
-    filterEnd += defaultFilterCache.end;
     if (!safe && autoEscape) {
       filterStart += 'Sqrl.F.e(';
       filterEnd += ')';

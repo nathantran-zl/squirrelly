@@ -3,7 +3,7 @@ export var initialTags = {
   s: '{{',
   e: '}}'
 }
-
+// TODO: Change m1 to ([\w$]+ *?) below. Have all arithmetic be done with helpers or JS
 // The regExp below matches all helper references inside helper parameters
 var paramHelperRefRegExp = /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|[\\]@(?:[\w$]*:)?[\w$]+|@(?:([\w$]*):)?([\w$]+)/g
 
